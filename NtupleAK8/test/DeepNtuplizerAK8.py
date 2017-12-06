@@ -18,7 +18,7 @@ options.inputFiles = ['root://cmsxrootd.fnal.gov//store/mc/RunIISummer16MiniAODv
 options.maxEvents = -1
 
 options.register('inputScript', '', VarParsing.multiplicity.singleton, VarParsing.varType.string, "input Script")
-options.register('skipEvents', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, "skip N events")
+options.register('skipEvents', 60000, VarParsing.multiplicity.singleton, VarParsing.varType.int, "skip N events")
 options.register('job', 0, VarParsing.multiplicity.singleton, VarParsing.varType.int, "job number")
 options.register('nJobs', 1, VarParsing.multiplicity.singleton, VarParsing.varType.int, "total jobs")
 options.register('fjKeepFlavors', [], VarParsing.multiplicity.list, VarParsing.varType.int, "Types of fatjet to keep in this sample")

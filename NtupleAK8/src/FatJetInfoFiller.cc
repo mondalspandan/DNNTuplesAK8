@@ -274,6 +274,14 @@ bool FatJetInfoFiller::fill(const pat::Jet& jet, size_t jetidx, const JetHelper&
   //flavor info
   data.fill<int>("fj_isBB", jet.jetFlavourInfo().getbHadrons().size() >= 2);
   data.fill<int>("fj_isNonBB", jet.jetFlavourInfo().getbHadrons().size() < 2);
+  if (abs(jet.hadronFlavour()) == 5){
+  	data.fill<int>("fj_isBB", jet.jetFlavourInfo().getbHadrons().size() >= 2 );	
+	data.fill<int>("fj_isNonBB", jet.jetFlavourInfo().getbHadrons().size() < 2);
+	}
+  else if ( abs(jet.hadronFlavour()) == 4){ 
+	data.fill<int>("fj_isCC", jet.jetFlavourInfo().getcHadrons().size() >= 2);
+	data.fill<int>("fj_isNonCC", jet.jetFlavourInfo().getcHadrons().size() < 2);
+	}
   data.fill<int>("fj_nbHadrons", jet.jetFlavourInfo().getbHadrons().size());
   data.fill<int>("fj_ncHadrons", jet.jetFlavourInfo().getcHadrons().size());
 

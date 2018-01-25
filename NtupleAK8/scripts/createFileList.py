@@ -20,9 +20,13 @@ def create(inputdir):
                 filesize = os.path.getsize(fullpath)
                 if filesize > 1000:
                     relpath = os.path.relpath(fullpath, start=inputdir)
-                    if 'test_sample' in dp:
+                    #print relpath.endswith('7.root', '8.root', '9.root')
+                    #if 'test_sample' in dp:
+                    if relpath.endswith(('7.root', '8.root', '9.root')):
+                        print "TESTFILE"
                         test_files.append(relpath)
                     else:
+                        print "TRAINFILE"
                         train_val_files.append(relpath)
                 else:
                     logging.warning('Ignore file %s: size=%d' % (fullpath, filesize))

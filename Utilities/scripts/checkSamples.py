@@ -3,7 +3,7 @@ import glob
 import os
 
 rt.gROOT.SetBatch()
-inDir = '/eos/uscms/store/group/lpchbb/deepdoubleb/phi_all/'
+inDir = '/eos/user/a/anovak/bulkcc'
 
 
 c = rt.TCanvas('c','c',500,400)

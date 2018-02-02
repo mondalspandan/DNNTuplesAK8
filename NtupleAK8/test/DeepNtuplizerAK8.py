@@ -12,7 +12,7 @@ options.outputFile = 'output.root'
 #options.inputFiles = 'file:/eos/user/a/anovak/DNNtuples/CMSSW_8_0_28/src/DeepNTuples/00D74F9D-9D14-E711-A4C0-1866DA879444.root'
 #options.inputFiles = 'file:/afs/cern.ch/work/l/lmastrol/public/deep-c_tagging/GluGluHToCC_official_highStat_0219759C-1DD6-E711-BCCA-02163E0144F7.root'
 #options.inputFiles = 'file:/afs/cern.ch/work/l/lmastrol/public/deep-c_tagging/GluGluHToBB_official_highStat_E6E6BC68-F543-E611-AB6F-003048CD716E.root'
-options.inputFiles = 'file:/afs/cern.ch/user/a/anovak/eos/DNNtuples/CMSSW_8_0_28/src/DeepNTuples/NtupleAK8/run/HIG-RunIISummer16MiniAODv2-04142_4.root'
+options.inputFiles = 'file:/afs/cern.ch/user/a/anovak/eos/DNNtuples/CMSSW_8_0_28/src/DeepNTuples/NtupleAK8/test/3C8DAB23-12EE-E711-9F42-0CC47A5FA211.root'
 options.maxEvents = -1
 
 options.register('inputScript', '', VarParsing.multiplicity.singleton, VarParsing.varType.string, "input Script")

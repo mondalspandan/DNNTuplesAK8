@@ -5,7 +5,7 @@ config = config()
 config.General.requestName = '_requestName_'
 config.General.workArea = '_workArea_'
 config.General.transferOutputs = True
-config.General.transferLogs = True
+config.General.transferLogs = False
 
 config.JobType.pluginName = 'Analysis'
 config.JobType.psetName = '_psetName_'
@@ -25,9 +25,6 @@ config.Data.outLFNDirBase = '/store/user/%s/' % (getUsernameFromSiteDB())
 config.Data.publication = False
 config.Data.ignoreLocality = True
 
-
-# uncomment this part to use CRAB to submit to FNAL_LPC
-# config.Data.ignoreLocality = True
 
 config.Site.whitelist = ['T2_CH_CERN', 'T2_HU_Budapest', 'T2_DE_RWTH']
 #config.Site.ignoreGlobalBlacklist = True

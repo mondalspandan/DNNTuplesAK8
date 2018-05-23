@@ -62,13 +62,14 @@ bool PFCandidateFiller::fill(const pat::Jet& jet, size_t jetidx, const JetHelper
 
   const auto& jetConstituents = jet_helper.getJetConstituents();
 
-  data.fill<int>("n_pfcands", jetConstituents.size());
-  data.fill<float>("npfcands", jetConstituents.size());
+  int nConstituents = 0;
 
   float etasign = jet.eta()>0 ? 1 : -1;
 
   for (const auto *pfcand : jetConstituents){
 
+    if (pfcand->pt() < minPt_) continue;
+    nConstituents += 1;
     // basic kinematics, valid for both charged and neutral
     data.fillMulti<float>("pfcand_ptrel", pfcand->pt()/jet.pt());
     data.fillMulti<float>("pfcand_erel", pfcand->energy()/jet.energy());
@@ -106,11 +107,20 @@ bool PFCandidateFiller::fill(const pat::Jet& jet, size_t jetidx, const JetHelper
 
     // impact parameters
     data.fillMulti<float>("pfcand_dz", catchInfs(pfcand->dz()));
-    data.fillMulti<float>("pfcand_dzsig", catchInfs(pfcand->dz()/pfcand->dzError()));
     data.fillMulti<float>("pfcand_dxy", catchInfs(pfcand->dxy()));
-    data.fillMulti<float>("pfcand_dxysig", catchInfs(pfcand->dxy()/pfcand->dxyError()));
+    //if( pfcand->hasTrackDetails() ) { // 101X
+    if( true ) { // 80X
+      data.fillMulti<float>("pfcand_dzsig", catchInfsAndBound(pfcand->dz()/pfcand->dzError(),0,-2000,2000));
+      data.fillMulti<float>("pfcand_dxysig", catchInfsAndBound(pfcand->dxy()/pfcand->dxyError(),0,-2000,2000));
+    }
+    else {
+      data.fillMulti<float>("pfcand_dzsig", -1);
+      data.fillMulti<float>("pfcand_dxysig", -1);
+    }
 
   }
+  data.fill<int>("n_pfcands", nConstituents);
+  data.fill<float>("npfcands", nConstituents);
 
 
   return true;

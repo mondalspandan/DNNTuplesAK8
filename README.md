@@ -5,7 +5,7 @@
 cmsrel CMSSW_8_0_28
 cd CMSSW_8_0_28/src/
 cmsenv
-git clone https://github.com/hqucms/DNNTuplesAK8 DeepNTuples
+git clone https://github.com/DeepDoubleB/DNNTuplesAK8 DeepNTuples -b minpt95_80X
 scram b -j8
 ```
 
@@ -29,9 +29,7 @@ To check all the options of the submission script, run
 ```
 
 You can set arguments to be passed to the cmsRun job in the beginning of the sample.conf file, e.g.,
-```
-fjKeepFlavors=2,3,4   # only keep fatjets whose labels match to the given number. 0:Light, 1:Top, 2:W, 3:Z, 4:Higgs 
-```
+~~fjKeepFlavors=2,3,4   # only keep fatjets whose labels match to the given number. 0:Light, 1:Top, 2:W, 3:Z, 4:Higgs~~
  
 ## Merge outputs (with random mixing of different samples)
 
@@ -52,5 +50,5 @@ mergeSamples.py [events per output file] [output dir] [path to the filelist prod
 ```
 e.g.,
 ```
-mergeSamples.py 100000 /eos/cms/store/user/$USER/DeepNtuples/output_dir/merged /eos/cms/store/user/$USER/DeepNtuples/output_dir/*/train_val_samples.txt
+mergeSamples.py 200000 /eos/uscms/store/group/lpchbb/deepdoubleb/phi_all /eos/uscms/store/group/lpchbb/20170717_ak8/QCD_Pt/qcd_*.txt /eos/uscms/store/group/lpchbb/20170717_ak8/BulkGrav/hbb_*.txt /eos/uscms/store/group/lpchbb/20170717_ak8/Phi/scalarpseudo_*.txt
 ``` 

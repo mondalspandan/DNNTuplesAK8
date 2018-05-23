@@ -5,12 +5,20 @@ import FWCore.ParameterSet.Config as cms
 from FWCore.ParameterSet.VarParsing import VarParsing
 options = VarParsing('analysis')
 
-options.outputFile = 'output.root'
-options.inputFiles = ['root://cmsxrootd.fnal.gov//store/mc/RunIISummer16MiniAODv2/BulkGravTohhTohbbhbb_narrow_M-2500_13TeV-madgraph/MINIAODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/80000/0A83E4E2-34B6-E611-89A0-549F35AE4FA2.root',
-		      'root://cmsxrootd.fnal.gov//store/mc/RunIISummer16MiniAODv2/BulkGravTohhTohbbhbb_narrow_M-2500_13TeV-madgraph/MINIAODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/80000/A88400F5-39B6-E611-BEB3-A0369F7F9DE0.root']
+#options.outputFile = 'output_bulk.root'
+#options.inputFiles = 'file:/eos/user/a/anovak/022C3683-D4AB-E611-AC4D-3417EBE70078.root'  #include file: for local files, for catalogues /store...
+#options.inputFiles = 'file:/afs/cern.ch/work/l/lmastrol/public/deep-c_tagging/HIG-RunIISummer16MiniAODv2-04133.root'
+#options.inputFiles = 'file:/afs/cern.ch/work/l/lmastrol/public/deep-c_tagging/BulkGravHH4C_M1000-RunIISummer16MiniAODv2.root'
+#options.inputFiles = 'file:/eos/user/a/anovak/DNNtuples/CMSSW_8_0_28/src/DeepNTuples/00D74F9D-9D14-E711-A4C0-1866DA879444.root'
+#options.inputFiles = 'file:/afs/cern.ch/work/l/lmastrol/public/deep-c_tagging/GluGluHToCC_official_highStat_0219759C-1DD6-E711-BCCA-02163E0144F7.root'
+#options.inputFiles = 'file:/afs/cern.ch/work/l/lmastrol/public/deep-c_tagging/GluGluHToBB_official_highStat_E6E6BC68-F543-E611-AB6F-003048CD716E.root'
 #options.inputFiles = ['root://cmsxrootd.fnal.gov//store/relval/CMSSW_9_2_2/RelValTTbar_13/MINIAODSIM/PU25ns_92X_upgrade2017_realistic_v1-v1/10000/8E7EE25F-294E-E711-A5CC-0025905B8610.root']
 #options.inputFiles = ['/store/relval/CMSSW_8_0_21/RelValTTbar_13/MINIAODSIM/PU25ns_80X_mcRun2_asymptotic_2016_TrancheIV_v6_Tr4GT_v6-v1/10000/74087230-AB98-E611-93EF-0025905A6138.root']
 #options.inputFiles = ['root://eoscms.cern.ch//store/relval/CMSSW_10_1_0_pre2/RelValQCD_FlatPt_15_3000_13/MINIAODSIM/100X_mcRun2_asymptotic_v2_FastSim-v1/20000/8C8833F5-D822-E811-8ED5-0CC47A4D76A2.root']
+
+options.outputFile = 'output.root'
+options.inputFiles = ['root://cmsxrootd.fnal.gov//store/mc/RunIISummer16MiniAODv2/BulkGravTohhTohbbhbb_narrow_M-2500_13TeV-madgraph/MINIAODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/80000/0A83E4E2-34B6-E611-89A0-549F35AE4FA2.root',
+		      'root://cmsxrootd.fnal.gov//store/mc/RunIISummer16MiniAODv2/BulkGravTohhTohbbhbb_narrow_M-2500_13TeV-madgraph/MINIAODSIM/PUMoriond17_80X_mcRun2_asymptotic_2016_TrancheIV_v6-v1/80000/A88400F5-39B6-E611-BEB3-A0369F7F9DE0.root']
 
 options.maxEvents = -1
 
@@ -36,13 +44,13 @@ options.parseArguments()
 process = cms.Process("DNNFiller")
 
 process.load('FWCore.MessageService.MessageLogger_cfi')
-process.MessageLogger.cerr.FwkReport.reportEvery = 1000
+process.MessageLogger.cerr.FwkReport.reportEvery = 10       
 if not options.inputScript:  # this is probably for testing
-	process.MessageLogger.cerr.FwkReport.reportEvery = 100
+	process.MessageLogger.cerr.FwkReport.reportEvery = 10
 
 process.options = cms.untracked.PSet(
    allowUnscheduled = cms.untracked.bool(True),  
-   wantSummary=cms.untracked.bool(False)
+   wantSummary=cms.untracked.bool(True)
 )
 
 print ('Using output file ' + options.outputFile)
@@ -64,6 +72,7 @@ numberOfFiles = len(process.source.fileNames)
 numberOfJobs = options.nJobs
 jobNumber = options.job
 
+print jobNumber
 process.source.fileNames = process.source.fileNames[jobNumber:numberOfFiles:numberOfJobs]
 if options.nJobs > 1:
     print ("running over these files:")

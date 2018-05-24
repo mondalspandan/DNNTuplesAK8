@@ -116,6 +116,8 @@ void FatJetInfoFiller::book() {
   //flavor info
   data.add<int>("fj_isBB", 0);
   data.add<int>("fj_isNonBB", 0);
+  data.add<int>("fj_isCC", 0);
+  data.add<int>("fj_isNonCC", 0);
   data.add<int>("fj_nbHadrons", 0);
   data.add<int>("fj_ncHadrons", 0);
   data.add<int>("fj_Hflavour", 0);

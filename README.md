@@ -2,10 +2,10 @@
 
 ## Setup
 ```
-cmsrel CMSSW_8_0_28
-cd CMSSW_8_0_28/src/
+cmsrel CMSSW_9_4_7
+cd CMSSW_9_4_7/src/
 cmsenv
-git clone https://github.com/hqucms/DNNTuplesAK8 DeepNTuples
+git clone https://github.com/DeepDoubleB/DNNTuplesAK8 DeepNTuples -b 94x
 scram b -j8
 ```
 

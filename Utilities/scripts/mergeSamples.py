@@ -37,12 +37,12 @@ if not os.path.isdir(args.outdir):
 #read number of jobs
 file=open(args.outdir+'/nentries','r')
 nJobs=file.read()
+#nJobs = 20
 
 listtoberun=[]
 listsucc=[]
 
 for j in range(int(nJobs)):
-    
     if os.path.exists(args.outdir+'/'+str(j)+'.succ'):
         listsucc.append(j)
         continue

@@ -45,7 +45,7 @@ TString createTempName(){
 
 TString prependXRootD(TString& path){
     //TString path = realpath(path, NULL);
-
+    //std::cout << path <<std::endl;
     if(path.BeginsWith("/eos/cms/")){
         TString append="root://eoscms.cern.ch//";
         TString s_remove="/eos/cms/";
@@ -61,6 +61,10 @@ TString prependXRootD(TString& path){
         return newpath;
     }
     else if(path.BeginsWith("//dcap")){
+        path.Replace(0,2,"");
+        //std::cout << "TEST" <<std::endl;
+    }
+    else if(path.BeginsWith("//root")){
         path.Replace(0,2,"");
         //std::cout << "TEST" <<std::endl;
     }
@@ -141,6 +145,7 @@ std::vector<TChain* > mergeDescriptor::createChains(
             delete b;
     branchinfos.clear();
     entriesperchain=std::vector<size_t>(infiles.size(),0);
+    std::cout << "WOOOOW" <<std::endl;
 
     branchinfos.push_back(new JetInfoFillerAK8());
     branchinfos.push_back(new FatJetInfoFiller());
@@ -169,6 +174,7 @@ std::vector<TChain* > mergeDescriptor::createChains(
             //if(usexrootd) //
             xrootdedpath=prependXRootD(xrootdedpath);
             //std::cout << xrootdedpath <<std::endl;
+            //chains.at(i)->Add(xrootdedpath+"/tree");
             chains.at(i)->Add(xrootdedpath+"/deepntuplizer/tree");
         }
         for(auto& bi:branchinfos){

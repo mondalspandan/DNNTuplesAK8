@@ -7,7 +7,7 @@ inDir = '/eos/user/a/anovak/bulkcc'
 
 
 c = rt.TCanvas('c','c',500,400)
-tchain = rt.TChain('deepntuplizer/tree')
+tchain = rt.TChain('tree')
 for tfileName in glob.glob(inDir + '/*.root'):
     n = tfileName.split('.root')[0].split('_')[-1]
     print glob.glob(inDir + '/' + n + '.succ')

@@ -52,7 +52,7 @@ if not options.inputScript:  # this is probably for testing
 
 process.options = cms.untracked.PSet(
    allowUnscheduled = cms.untracked.bool(True),  
-   wantSummary=cms.untracked.bool(False)
+   wantSummary=cms.untracked.bool(True)
 )
 
 print ('Using output file ' + options.outputFile)
@@ -110,7 +110,7 @@ bTagDiscriminators = [
 	'pfDeepCSVJetTags:probb',
 	'pfDeepCSVJetTags:probc',
 	'pfDeepCSVJetTags:probbb',
-	#'pfDeepCSVJetTags:probcc',
+	'pfDeepCSVJetTags:probcc',
 	'pfBoostedDoubleSecondaryVertexAK8BJetTags'
 ]
 

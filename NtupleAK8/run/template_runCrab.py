@@ -19,15 +19,17 @@ config.JobType.pyCfgParams += ['inputDataset=%s' % config.Data.inputDataset]
 
 #config.Data.inputDBS = 'phys03'
 config.Data.inputDBS = 'global'
-config.Data.splitting = 'FileBased'
-config.Data.unitsPerJob = _unitsPerJob_
+#config.Data.splitting = 'FileBased'
+#config.Data.unitsPerJob = _unitsPerJob_
+config.Data.splitting = 'Automatic'
+config.Data.unitsPerJob = 200
 config.Data.outLFNDirBase = '/store/user/%s/_outLFNDirBase_' % (getUsernameFromSiteDB())
 config.Data.publication = False
 config.Data.ignoreLocality = True
 
 
 config.Site.whitelist = ['T2_CH_CERN', 'T2_DE_DESY', 'T2_DE_RWTH']
-#config.Site.ignoreGlobalBlacklist = True
+config.Site.ignoreGlobalBlacklist = True
 #config.Site.blacklist = ['T3_US_UMiss', ]
 
 #config.Site.storageSite = '_storageSite_'

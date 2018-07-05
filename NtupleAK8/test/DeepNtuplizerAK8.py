@@ -110,7 +110,7 @@ bTagDiscriminators = [
 	'pfDeepCSVJetTags:probb',
 	'pfDeepCSVJetTags:probc',
 	'pfDeepCSVJetTags:probbb',
-	'pfDeepCSVJetTags:probcc',
+	 #'pfDeepCSVJetTags:probcc',
 	'pfBoostedDoubleSecondaryVertexAK8BJetTags'
 ]
 

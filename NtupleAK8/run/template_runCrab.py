@@ -31,13 +31,14 @@ config.Data.ignoreLocality = True
 # config.Site.whitelist = ['T3_US_FNALLPC']
 # config.Site.ignoreGlobalBlacklist = True
 
-config.Site.whitelist = ['T2_CH_CERN', 'T2_DE_DESY', 'T2_DE_RWTH']
-config.Site.ignoreGlobalBlacklist = True
-#config.Site.blacklist = ['T3_US_UMiss', ]
+# Run in DESY/RWTH
+#config.Site.whitelist = ['T2_CH_CERN', 'T2_DE_DESY', 'T2_DE_RWTH']
+#config.Site.ignoreGlobalBlacklist = True
+#config.Site.blacklist = ['T3_US_UMiss']
+#config.User.voGroup = 'dcms'
+#config.User.voRole = 'NULL'
 
-#config.Site.storageSite = '_storageSite_'
-config.Site.storageSite = "T2_DE_RWTH"
+config.Site.storageSite = '_storageSite_'
+#config.Site.storageSite = "T2_DE_RWTH"
 
-config.User.voGroup = 'dcms'
-config.User.voRole = 'NULL'
 

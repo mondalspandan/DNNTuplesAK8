@@ -10,17 +10,18 @@ import ROOT
 
 #names = ["QCD", "Glu", "Bul", "GluGluH"]
 #names = ["GluGluH"]
-names = ["Bulk", "qcd"]
+names = ["Hcc", "Hbb", "qcd"]
 
-dcap = "dcap://grid-dcap-extern.physik.rwth-aachen.de/pnfs/physik.rwth-aachen.de/cms/store/user/anovak"
-srm = "srm://grid-srm.physik.rwth-aachen.de:8443/srm/managerv2?SFN=/pnfs/physik.rwth-aachen.de/cms/store/user/anovak"
-fnal = True
+dcap = "dcap://grid-dcap-extern.physik.rwth-aachen.de/pnfs/physik.rwth-aachen.de/cms/store/user/anovak/94xv2"
+srm = "srm://grid-srm.physik.rwth-aachen.de:8443/srm/managerv2?SFN=/pnfs/physik.rwth-aachen.de/cms/store/user/anovak/94xv2"
+fnal = False
 if fnal:dirs = os.popen("eos root://cmseos.fnal.gov ls /store/group/lpchbb/20180524_ak8_94x/").read().split("\n")
 else:	dirs = os.popen("gfal-ls "+srm).read().split("\n")
 
 print "Processsing directories starting with: ", names
 print "======================================="
 all_files = []
+print dirs
 for i, d in enumerate(dirs):
 	#print i, d
 	dir_files = []
@@ -44,19 +45,22 @@ for i, d in enumerate(dirs):
 				        f.write('\n'.join(files))
 	
 	else:
-		sd = os.popen("gfal-ls "+srm+"/"+d).read().replace("\n", "")
-		sd2 = os.popen("gfal-ls "+srm+"/"+d+"/"+sd).read().replace("\n", "")
-		sd3 = os.popen("gfal-ls "+srm+"/"+d+"/"+sd+"/"+sd2).read().replace("\n", "")
-		files = os.popen("gfal-ls "+srm+"/"+d+"/"+sd+"/"+sd2+"/"+sd3).read().split("\n")
+		sd = os.popen("gfal-ls "+srm+"/"+d).read().split('\n')
+		for s in sd:
+			if not s.endswith(tuple(["madgraph", "pythia8"])):continue 
+			fs = []
+			sd2 = os.popen("gfal-ls "+srm+"/"+d+"/"+s).read().replace("\n", "")
+			sd3 = os.popen("gfal-ls "+srm+"/"+d+"/"+s+"/"+sd2).read().replace("\n", "")
+			sd4 = os.popen("gfal-ls "+srm+"/"+d+"/"+s+"/"+sd2+"/"+sd3).read().replace("\n", "")
+			files = os.popen("gfal-ls "+srm+"/"+d+"/"+s+"/"+sd2+"/"+sd3+'/'+sd4).read().split("\n")
+			#print "gfal-ls "+srm+"/"+d+"/"+s+"/"+sd2+"/"+sd3+'/'+sd4
+			#print files
+			#continue
+			path = dcap+"/"+d+"/"+s+"/"+sd2+"/"+sd3+"/"+sd4
+			for f in files:
+				if not f.endswith("root"): continue
+				fs.append(path+"/"+f)
 
-	if not fnal:
-		path = dcap+"/"+d+"/"+sd+"/"+sd2+"/"+sd3
-		for f in files:
-			if not f.endswith("root"): continue
-			all_files.append(path+"/"+f)
-			dir_files.append(path+"/"+f)
-
-
-		with open("lists/"+d+".txt", 'w') as f:
-		        f.write('\n'.join(dir_files))
-        #print 'Write training/validation files to %s' % os.path.join(inputdir, 'train_val_samples.txt')
+			print fs
+			with open("lists/"+s+".txt", 'w') as f:
+			        f.write('\n'.join(fs))
